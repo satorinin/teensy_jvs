@@ -1,0 +1,5 @@
+BasedOnStyle: LLVM
+ColumnLimit: 120
+BreakBeforeBraces: Allman
+AlwaysBreakTemplateDeclarations: Yes
+PointerAlignment: Left
