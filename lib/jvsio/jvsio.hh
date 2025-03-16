@@ -1,6 +1,6 @@
 #pragma once
 
-#include "jvs_frame.hh"
+#include <jvs_frame.hh>
 
 void setup_io();
 void build_io_packet(int player, JVSResponse& response);

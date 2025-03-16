@@ -1,4 +1,3 @@
-#include <iostream>
 #include "jvs_serial.hh"
 
 namespace JVSSerial

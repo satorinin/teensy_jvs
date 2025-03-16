@@ -1,6 +1,6 @@
 #pragma once
-
-#include <Arduino.h>
+#include <stdint.h>
+#include <jvs_serial.hh>
 
 enum JVSStatusCode : uint8_t
 {
@@ -29,17 +29,18 @@ enum JVSState
 class JVSFrameReader
 {
 public:
-  JVSFrameReader();
+  JVSFrameReader(JVSSerial::Interface&);
 
   bool update();
   int addr();
-  char* buffer();
+  uint8_t* buffer();
   bool read(uint8_t& val);
   uint32_t size() const;
   void reset();
   uint8_t id() const;
 
 private:
+  JVSSerial::Interface& jvsInterface_;
   JVSState state_;
   uint8_t buffer_[256];
   uint32_t cur_len_;

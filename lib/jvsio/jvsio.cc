@@ -1,6 +1,7 @@
-#include "jvs_frame.hh"
 #include <Arduino.h>
 #include <bitset>
+
+#include "jvsio.hh"
 
 int starts[2] = {36, 35};
 int sticks[2][4] = {{5, 4, 22, 6}, {31, 30, 32, 23}};

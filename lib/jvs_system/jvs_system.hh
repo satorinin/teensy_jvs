@@ -1,4 +1,17 @@
-#include "jvs_frame.hh"
+#pragma once
+#include <jvs_frame.hh>
+
+#include <stdint.h>
+#include <cstddef>
+#include <string>
+
+#ifdef _PLATFORM_TEENSY
+#include "Arduino.h"
+#else
+#include <chrono>
+#include <queue>
+#include <thread>
+#endif
 
 enum JVSCommand : uint8_t
 {

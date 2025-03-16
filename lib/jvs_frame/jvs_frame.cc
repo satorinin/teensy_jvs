@@ -1,6 +1,7 @@
 #include "jvs_frame.hh"
+#include <jvs_serial.hh>
 
-JVSFrameReader::JVSFrameReader() : state_(JVSState::READ_ID) {}
+JVSFrameReader::JVSFrameReader(JVSSerial::Interface& interface) :  jvsInterface_{interface}, state_(JVSState::READ_ID) {}
 
 void JVSFrameReader::reset()
 {
@@ -11,12 +12,12 @@ void JVSFrameReader::reset()
 
 bool JVSFrameReader::read(uint8_t& val)
 {
-  if (!Serial4.available())
+  if (!jvsInterface_.available())
   {
     return false;
   }
 
-  uint8_t tmp = Serial4.read();
+  uint8_t tmp = jvsInterface_.read();
   if (tmp == 0xD0)
   {
     escape_ = true;
@@ -78,7 +79,7 @@ uint32_t JVSFrameReader::size() const { return len_; }
 
 uint8_t JVSFrameReader::id() const { return id_; }
 
-char* JVSFrameReader::buffer() { return buffer_; }
+uint8_t* JVSFrameReader::buffer() { return buffer_; }
 
 JVSResponse::JVSResponse() : id(buffer[0]), len(buffer[1]), status(*reinterpret_cast<JVSStatusCode*>(&buffer[2]))
 {
