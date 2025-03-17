@@ -17,10 +17,10 @@
 class JVSIO
 {
     public:
-        JVSIO(JVSParallel::Interface& parallel, const JVSConfig& config): parallel_(parallel), config_(config) {}
-        void setup_io(const JVSConfig&);
-        void build_io_packet(int player, JVSResponse& response);
-        void update_analog(uint16_t (&analog_values)[8]);
+     JVSIO(JVSParallel::Interface&, const JVSConfig&);
+     void setup_io(const JVSConfig&);
+     void build_io_packet(int player, JVSResponse& response);
+     void update_analog(uint16_t (&analog_values)[8]);
 
     private:
         JVSParallel::Interface& parallel_;

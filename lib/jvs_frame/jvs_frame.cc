@@ -137,3 +137,12 @@ void JVSResponse::append_str(const char* str)
   }
   buffer[data_offset + len++] = '\0';
 }
+
+void JVSResponse::flush()
+{
+  len = 1;
+  checksum = 0;
+  id = 0;
+  memset(buffer, 0, sizeof(buffer));
+  status = JVSStatusCode::NORMAL_STATUS;
+}

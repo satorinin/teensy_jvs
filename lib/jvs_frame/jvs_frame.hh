@@ -59,6 +59,7 @@ public:
   void append_u16(const uint16_t value);
   void append(const char* str, const size_t len);
   void append_str(const char* str);
+  void flush();
 
   static constexpr size_t data_offset = 2;
   uint8_t& id;
