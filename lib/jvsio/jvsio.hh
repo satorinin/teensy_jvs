@@ -1,15 +1,28 @@
 #pragma once
 
+#include <jvs_parallel.hh>
 #include <jvs_config.hh>
 #include <jvs_frame.hh>
 #include <jvs_serial.hh>
 #include <jvs_config.hh>
 #include <bitset>
 
-#ifdef _PLATFORM_TEENSY
-#include <Arduino.h>
-#endif
 
-void setup_io(const JVSConfig&);
-void build_io_packet(int player, JVSResponse& response);
-void update_analog(uint16_t (&analog_values)[8]);
+/**
+ * @brief   Class for JVS IO.
+ * 
+ * This class is responsible for handling the IO of the JVS system.
+ * 
+ */
+class JVSIO
+{
+    public:
+        JVSIO(JVSParallel::Interface& parallel, const JVSConfig& config): parallel_(parallel), config_(config) {}
+        void setup_io(const JVSConfig&);
+        void build_io_packet(int player, JVSResponse& response);
+        void update_analog(uint16_t (&analog_values)[8]);
+
+    private:
+        JVSParallel::Interface& parallel_;
+        const JVSConfig& config_;
+};
