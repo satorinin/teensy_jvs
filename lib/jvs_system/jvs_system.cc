@@ -1,5 +1,5 @@
-#include "jvs_system.hh"
 #include <jvsio.hh>
+#include "jvs_system.hh"
 
 size_t JVSSystem::process_message(const uint8_t id, const char* request_buffer, size_t request_len,
                                   JVSResponse& response, bool& send_response)

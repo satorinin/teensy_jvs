@@ -13,8 +13,7 @@
 #include <thread>
 #endif
 
-enum JVSCommand : uint8_t
-{
+enum JVSCommand : uint8_t {
   // Global
   RESET = 0xF0,
   SET_ADDR = 0xF1,
@@ -38,7 +37,21 @@ enum JVSCommand : uint8_t
   INCREASE_COIN = 0x31,
   DECREASE_COIN = 0x30,
 
-  RETRANSMIT = 0x2F
+  RETRANSMIT = 0x2F,
+
+  // JVS Dash
+  kCmdCommSup = 0xD0,
+  kCmdCommChg = 0xF2
+};
+
+enum JVSIO_CommSupMode {
+
+  k115200 = 0,
+
+  k1M = 1,
+
+  k3M = 2,
+
 };
 
 inline const char* get_command_type_str(JVSCommand cmd)

@@ -1,20 +1,19 @@
-#include <Arduino.h>
-#include <bitset>
-
 #include "jvsio.hh"
 
 int starts[2] = {36, 35};
-int sticks[2][4] = {{5, 4, 22, 6}, {31, 30, 32, 23}};
+int levers[2][4] = {{5, 4, 22, 6}, {31, 30, 32, 23}};
 int buttons[2][8] = {{7, 8, 9, 10, 11, 12, 28, 29}, {21, 20, 19, 18, 40, 39, 38, 37}};
 
-void setup_io()
+
+#ifdef _PLATFORM_TEENSY
+void setup_io(const JVSConfig& config)
 {
   pinMode(starts[0], INPUT_PULLUP);
   pinMode(starts[1], INPUT_PULLUP);
   for (int i = 0; i < 4; ++i)
   {
-    pinMode(sticks[0][i], INPUT_PULLUP);
-    pinMode(sticks[1][i], INPUT_PULLUP);
+    pinMode(levers[0][i], INPUT_PULLUP);
+    pinMode(levers[1][i], INPUT_PULLUP);
   }
   for (int i = 0; i < 8; ++i)
   {
@@ -22,6 +21,9 @@ void setup_io()
     pinMode(buttons[1][i], INPUT_PULLUP);
   }
 }
+#else
+void setup_io(const JVSConfig& config){}
+#endif
 
 void build_io_packet(int player, JVSResponse& response)
 {
@@ -30,7 +32,7 @@ void build_io_packet(int player, JVSResponse& response)
 
   for (int i = 0; i < 4; ++i)
   {
-    packet.set(i + 2, !digitalRead(sticks[player][i]));
+    packet.set(i + 2, !digitalRead(levers[player][i]));
   }
 
   bool press_service = true;
@@ -66,19 +68,19 @@ void update_analog(uint16_t (&analog_values)[8])
   analog_values[0] = middle;
   analog_values[1] = middle;
 
-  if (!digitalRead(sticks[player][0]))
+  if (!digitalRead(levers[player][0]))
   {
     analog_values[1] += magnitude;
   }
-  if (!digitalRead(sticks[player][1]))
+  if (!digitalRead(levers[player][1]))
   {
     analog_values[1] -= magnitude;
   }
-  if (!digitalRead(sticks[player][2]))
+  if (!digitalRead(levers[player][2]))
   {
     analog_values[0] += magnitude;
   }
-  if (!digitalRead(sticks[player][3]))
+  if (!digitalRead(levers[player][3]))
   {
     analog_values[0] -= magnitude;
   }

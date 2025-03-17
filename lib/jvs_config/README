@@ -1,0 +1,18 @@
+sample toml config:
+
+```
+# config.toml
+test_button = 41
+service_button = 42
+
+[[players]]
+buttons = [7, 8, 9, 10, 11, 12, 28, 29]
+levers = [[5, 4, 22, 6]]
+start_button = 36
+analogs = [[14, 15]]  # Optional analog stick X,Y pins
+
+[[players]]
+buttons = [21, 20, 19, 18, 40, 39, 38, 37]
+levers = [[31, 30, 32, 23]]
+start_button = 35
+```
