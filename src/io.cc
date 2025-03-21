@@ -9,7 +9,7 @@ int buttons[2][8] = {{7, 8, 9, 10, 11, 12, 28, 29}, {21, 20, 19, 18, 40, 39, 38,
 
 void setup_io()
 {
-  pinMode(game_button INPUT_PULLUP);
+  pinMode(game_button, INPUT_PULLUP);
   pinMode(starts[0], INPUT_PULLUP);
   pinMode(starts[1], INPUT_PULLUP);
   for (int i = 0; i < 4; ++i)
